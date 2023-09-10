@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/51f51901c9.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&family=Ribeye&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+    <title>Weather app</title>
+  </head>
+  <body>
+    <div class="change-theme">
+      <button class="button-blue"><i class="fa-solid fa-circle"></i></button>
+      <button class="button-green"><i class="fa-solid fa-circle"></i></button>
+      <button class="button-pink"><i class="fa-solid fa-circle"></i></button>
+    </div>
+    <div class="container">
+      <div class="row city">
+        <div class="col current-city" id="city-name">Novi Sad</div>
+        <form class="col searchbar" id="searchform">
+          <input
+            class="bar form-control"
+            id="searchform-input"
+            type="text"
+            placeholder="Search city..."
+            size="20"
+            autofocus
+            autocomplete="off"
+          />
+          <input class="go-button" type="image" src="src/images/search.svg" />
+          <button class="my-location-button" id="my-location-button">
+            <img src="src/images/search-location.svg" />
+          </button>
+        </form>
+      </div>
+      <div class="current-date-time" id="time-now">Friday, Aug 4, 17:24</div>
+      <div class="current-data">
+        <div class="row">
+          <div class="col temp-current">
+            <img src="src/images/sun.png" width="70px" />
+            <span id="current-temp">31</span>
+            <span class="c-f">
+              <span id="celsius">
+                <a href="#" class="tempconversion-link"> °C</a>
+              </span>
+              |
+              <span id="fahrenheit">
+                <a href="#" class="tempconversion-link"> °F </a>
+              </span>
+            </span>
+            <br />
+            <div class="temp-current-min-max">
+              <span class="temp-max" id="temp-current-max">35</span>/
+              <span id="temp-min">24</span>
+            </div>
+          </div>
+          <div class="col current-other-info">
+            <ul>
+              <li id="humidity">Humidity: 44%</li>
+              <li id="wind">Wind: 10 km/h</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row weather-week">
+        <div class="col weather-day">
+          <div class="day-name">Sat</div>
+          <img class="weather-symbol" src="src/images/sun.png" />
+          <div class="day-max-min"><strong>35</strong>/24</div>
+        </div>
+        <div class="col weather-day">
+          <div class="day-name">Sun</div>
+          <img class="weather-symbol" src="src/images/sun.png" />
+          <div class="day-max-min"><strong>35</strong>/24</div>
+        </div>
+        <div class="col weather-day">
+          <div class="day-name">Mon</div>
+          <img class="weather-symbol" src="src/images/cloud.png" />
+          <div class="day-max-min"><strong>35</strong>/24</div>
+        </div>
+        <div class="col weather-day">
+          <div class="day-name">Tue</div>
+          <img class="weather-symbol" src="src/images/rain.png" />
+          <div class="day-max-min"><strong>35</strong>/24</div>
+        </div>
+        <div class="col weather-day">
+          <div class="day-name">Wed</div>
+          <img class="weather-symbol" src="src/images/sun-cloud.png" />
+          <div class="day-max-min"><strong>35</strong>/24</div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      icons made by Freepik from
+      <a href="https://www.flaticon.com/" target="_blank">flaticon</a> <br />
+      built by ana atanackovic for
+      <a href="https://www.shecodes.io/" target="_blank">shecodes</a>
+    </footer>
+    <script src="src/index.js"></script>
+  </body>
+</html>
