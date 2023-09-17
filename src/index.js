@@ -57,6 +57,33 @@ function formatDate(date) {
   return `${day}, ${month} ${currentDate}, ${hour}:${minutes}`;
 }
 
+function showIcon(icon) {
+  let url = null;
+  if (icon === "01d") {
+    url = "src/images/sun.png";
+  } else if (icon === "02d") {
+    url = "src/images/sun-cloud.png";
+  } else if (icon === "03d" || icon === "04d") {
+    url = "src/images/cloud.png";
+  } else if (icon === "09d" || icon === "10d") {
+    url = "src/images/rain.png";
+  } else if (icon === "11d") {
+    url = "src/images/storm.png";
+  } else if (icon === "13d") {
+    url = "src/images/snow.png";
+  } else if (icon === "50d") {
+    url = "src/images/mist.png";
+  } else if (icon === "13d") {
+    url = "src/images/sun.png";
+  } else if (icon === "11d") {
+    url = "src/images/sun.png";
+  } else {
+    url = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
+  }
+
+  return url;
+}
+
 function showWeather(response) {
   document.querySelector("#city-name").innerHTML = response.data.name;
   let temperature = document.querySelector("#current-temp");
@@ -69,6 +96,8 @@ function showWeather(response) {
   tempMax.innerHTML = Math.round(response.data.main.temp_max);
   let tempMin = document.querySelector("#temp-min");
   tempMin.innerHTML = Math.round(response.data.main.temp_min);
+  let icon = document.querySelector("#icon");
+  icon.setAttribute("src", `${showIcon(response.data.weather[0].icon)}`);
 }
 
 function search(city) {
