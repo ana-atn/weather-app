@@ -86,6 +86,7 @@ function showIcon(icon) {
 
 function showWeather(response) {
   document.querySelector("#city-name").innerHTML = response.data.name;
+
   let temperature = document.querySelector("#current-temp");
   temperature.innerHTML = Math.round(response.data.main.temp);
   let humidity = document.querySelector("#humidity");
@@ -98,6 +99,8 @@ function showWeather(response) {
   tempMin.innerHTML = Math.round(response.data.main.temp_min);
   let icon = document.querySelector("#icon");
   icon.setAttribute("src", `${showIcon(response.data.weather[0].icon)}`);
+
+  currentCelsius = response.data.main.temp;
 }
 
 function search(city) {
@@ -112,14 +115,19 @@ function handleSubmit(event) {
   search(city.value);
 }
 
-function showCelsius() {
-  currentTemperature.innerHTML = "31";
+function showCelsius(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#current-temp");
+  temperature.innerHTML = Math.round(currentCelsius);
   fahrenheitTemperature.classList.add("not-showing");
   celsiusTemperature.classList.remove("not-showing");
 }
 
-function showFahrenheit() {
-  currentTemperature.innerHTML = "88";
+function showFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheit = (currentCelsius * 9) / 5 + 32;
+  let temperature = document.querySelector("#current-temp");
+  temperature.innerHTML = Math.round(fahrenheit);
   fahrenheitTemperature.classList.remove("not-showing");
   celsiusTemperature.classList.add("not-showing");
 }
@@ -149,6 +157,8 @@ timeNow.innerHTML = formatDate(now);
 
 let searchform = document.querySelector("#searchform");
 searchform.addEventListener("submit", handleSubmit);
+
+let currentCelsius = null;
 
 let currentTemperature = document.querySelector("#current-temp");
 let celsiusTemperature = document.querySelector("#celsius");
