@@ -108,10 +108,8 @@ function search(city) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  let city = document.querySelector("#searchform-input").value;
-  let cityName = document.querySelector("#city-name");
-  cityName.innerHTML = city;
-  search(city);
+  let city = document.querySelector("#searchform-input");
+  search(city.value);
 }
 
 function showCelsius() {
