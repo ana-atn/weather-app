@@ -84,6 +84,29 @@ function showIcon(icon) {
   return url;
 }
 
+function displayForecast() {
+  let forecast = document.querySelector("#forecast");
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col weather-day">
+      <div class="day-name">Sat</div>
+      <img class="weather-symbol" src="src/images/sun.png" />
+      <div class="day-max-min">
+        <strong>35</strong>/24
+      </div>
+    </div>
+`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecast.innerHTML = forecastHTML;
+}
+
 function showWeather(response) {
   document.querySelector("#city-name").innerHTML = response.data.name;
 
@@ -171,3 +194,4 @@ let myLocationButton = document.querySelector("#my-location-button");
 myLocationButton.addEventListener("click", getCurrentPosition);
 
 search("New York");
+displayForecast;
