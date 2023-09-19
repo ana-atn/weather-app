@@ -57,25 +57,38 @@ function formatDate(date) {
   return `${day}, ${month} ${currentDate}, ${hour}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function showForecast(response) {
-  console.log(response.data.daily);
+  let dailyForecast = response.data.daily;
 
   let forecast = document.querySelector("#forecast");
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  dailyForecast.forEach(function (dailyForecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
     <div class="col weather-day">
-      <div class="day-name">${day}</div>
-      <img class="weather-symbol" src="src/images/sun.png" />
+      <div class="day-name">${formatDay(dailyForecastDay.dt)}</div>
+      <img class="weather-symbol" src="${showIcon(
+        dailyForecastDay.weather[0].icon
+      )}" />
       <div class="day-max-min">
-        <strong>35</strong>/24
+        <strong>${Math.round(dailyForecastDay.temp.max)}
+        </strong>/${Math.round(dailyForecastDay.temp.min)}
       </div>
     </div>
 `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -84,26 +97,32 @@ function showForecast(response) {
 
 function showIcon(icon) {
   let url = null;
-  if (icon === "01d") {
+  if (icon === "01d" || icon === "01n") {
     url = "src/images/sun.png";
-  } else if (icon === "02d") {
+  } else if (icon === "02d" || icon === "02n") {
     url = "src/images/sun-cloud.png";
-  } else if (icon === "03d" || icon === "04d") {
+  } else if (
+    icon === "03d" ||
+    icon === "03n" ||
+    icon === "04d" ||
+    icon === "04n"
+  ) {
     url = "src/images/cloud.png";
-  } else if (icon === "09d" || icon === "10d") {
+  } else if (
+    icon === "09d" ||
+    icon === "09n" ||
+    icon === "10d" ||
+    icon === "10n"
+  ) {
     url = "src/images/rain.png";
-  } else if (icon === "11d") {
+  } else if (icon === "11d" || icon === "11n") {
     url = "src/images/storm.png";
-  } else if (icon === "13d") {
+  } else if (icon === "13d" || icon === "13n") {
     url = "src/images/snow.png";
-  } else if (icon === "50d") {
+  } else if (icon === "50d" || icon === "50n") {
     url = "src/images/mist.png";
-  } else if (icon === "13d") {
-    url = "src/images/sun.png";
-  } else if (icon === "11d") {
-    url = "src/images/sun.png";
   } else {
-    url = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
+    url = "src/images/cloud-computing.png";
   }
 
   return url;
@@ -204,4 +223,4 @@ fahrenheitTemperature.addEventListener("click", showFahrenheit);
 let myLocationButton = document.querySelector("#my-location-button");
 myLocationButton.addEventListener("click", getCurrentPosition);
 
-search("New York");
+search("Lisbon");
