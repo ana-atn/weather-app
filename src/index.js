@@ -57,7 +57,9 @@ function formatDate(date) {
   return `${day}, ${month} ${currentDate}, ${hour}:${minutes}`;
 }
 
-function displayForecast() {
+function showForecast(response) {
+  console.log(response.data.daily);
+
   let forecast = document.querySelector("#forecast");
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
 
@@ -107,6 +109,13 @@ function showIcon(icon) {
   return url;
 }
 
+function getForecast(coordinates) {
+  let apiKey = "bf54175800a55e59e6c4d6461deeef12";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showForecast);
+}
+
 function showWeather(response) {
   document.querySelector("#city-name").innerHTML = response.data.name;
 
@@ -124,10 +133,12 @@ function showWeather(response) {
   icon.setAttribute("src", `${showIcon(response.data.weather[0].icon)}`);
 
   currentCelsius = response.data.main.temp;
+
+  getForecast(response.data.coord);
 }
 
 function search(city) {
-  let apiKey = "7938efc80ce4e41838324558e6af1b4a";
+  let apiKey = "bf54175800a55e59e6c4d6461deeef12";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showWeather);
 }
@@ -156,7 +167,7 @@ function showFahrenheit(event) {
 }
 
 function showPosition(position) {
-  let apiKey = "7938efc80ce4e41838324558e6af1b4a";
+  let apiKey = "bf54175800a55e59e6c4d6461deeef12";
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
@@ -194,4 +205,3 @@ let myLocationButton = document.querySelector("#my-location-button");
 myLocationButton.addEventListener("click", getCurrentPosition);
 
 search("New York");
-displayForecast();
