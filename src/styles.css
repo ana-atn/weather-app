@@ -125,6 +125,7 @@ button:hover {
   border-radius: 5px;
   padding: 5px;
   background-color: white;
+  margin: 3px;
 }
 .day-name {
   text-align: center;
